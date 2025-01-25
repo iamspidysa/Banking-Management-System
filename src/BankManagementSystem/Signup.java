@@ -249,7 +249,7 @@ public class Signup extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null,"Fill all the Details");
             }else{
                 // 3.6.3 - Calling our connection class.
-                Con con1 = new Con();
+                Conn con1 = new Conn();
                 String query = "insert into signup values ('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+marital+"','"+address+"','"+city+"','"+pincode+"','"+state+"')";
                 // 3.6.4 - Now we Execute query.
                 con1.statement.executeUpdate(query);
