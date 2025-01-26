@@ -245,7 +245,7 @@ public class Signup extends JFrame implements ActionListener {
              Which can bring better maintainability code.
               */
             // 3.6.2 - Checking if fields are empty then fill the detail then proceed.
-            if(name.equals("") || fname.equals("") || dob.equals("") || gender.equals("")){
+            if(false){
                 JOptionPane.showMessageDialog(null,"Fill all the Details");
             }else{
                 // 3.6.3 - Calling our connection class.
@@ -253,8 +253,8 @@ public class Signup extends JFrame implements ActionListener {
                 String query = "insert into signup values ('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+marital+"','"+address+"','"+city+"','"+pincode+"','"+state+"')";
                 // 3.6.4 - Now we Execute query.
                 con1.statement.executeUpdate(query);
-                // 3.6.5 - After executing query , we need to jump to another class. So we create SIGNUP2
-                new Signup2();
+                // 3.7 - After executing query , we need to jump to another class, to Fill another details. also passing "Random" as parameter
+                new Signup2(rand);
                 setVisible(false);
             }
 
