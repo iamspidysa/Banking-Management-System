@@ -8,16 +8,16 @@ import java.awt.event.ActionListener;
 // 3.7.2 - extends JFrame to make another form
 public class Signup2 extends JFrame implements ActionListener {
     // 3.7.3 - Creating
-    static int formno; //
+    int formno; //
     // 4.2 Creating ComboBox;
     JComboBox comboBox,comboBox2,comboBox3,comboBox4,comboBox5,comboBox6;
     JTextField textPAN,textAadhar;
     JRadioButton r1,r2,r3,r4;
     JButton next;
         // 3.7 - Creating Parameterized Constructor because We will pass FORM NO as parameter in another Class Form , and to maintain same form no in another form too.
-        Signup2(int rand){
+        Signup2(int formno){
             super("APPLICATION FORM");
-            formno = rand; // 3.7.4 rand does have value from previous class , so we are storing value in this file variable.
+            this.formno = formno; // 3.7.4 rand does have value from previous class , so we are storing value in this file variable.
             // And everything is similar to previous one , so only new things will be pointed.
             ImageIcon i10 = new ImageIcon(ClassLoader.getSystemResource("icon/bank.png"));
             Image i11 = i10.getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT);
@@ -133,6 +133,9 @@ public class Signup2 extends JFrame implements ActionListener {
             r2.setBounds(460,490,100,30);
             r2.setFocusPainted(false);
             add(r2);
+            ButtonGroup buttonGroup = new ButtonGroup();
+            buttonGroup.add(r1);
+            buttonGroup.add(r2);
 
             // Existing Account
             JLabel l11 = new JLabel("Existing Account :");
@@ -151,15 +154,18 @@ public class Signup2 extends JFrame implements ActionListener {
             r4.setBounds(460,540,100,30);
             r4.setFocusPainted(false);
             add(r4);
+            ButtonGroup buttonGroup2 = new ButtonGroup();
+            buttonGroup2.add(r3);
+            buttonGroup2.add(r4);
 
             // Form Number
-            JLabel l12 = new JLabel("Form No : ");
-            l12.setFont(new Font("Raleway",Font.BOLD,18));
+            JLabel l12 = new JLabel("Form No");
+            l12.setFont(new Font("Raleway",Font.BOLD,16));
             l12.setBounds(700,10,100,30);
             add(l12);
             JLabel l13 = new JLabel(formno+"");
-            l13.setFont(new Font("Raleway",Font.BOLD,18));
-            l13.setBounds(700,30,100,30);
+            l13.setFont(new Font("Raleway",Font.BOLD,16));
+            l13.setBounds(710,30,100,30);
             add(l13);
 
             // Button next
@@ -168,7 +174,8 @@ public class Signup2 extends JFrame implements ActionListener {
             next.setBackground(Color.WHITE);
             next.setForeground(Color.BLACK);
             next.setBounds(570,640,100,30);
-            next.addActionListener(this);  // Adding Listner Event on button, you must implement ActionListener to class.
+            // 4.3 - Adding listener to button.
+            next.addActionListener(this);  // Adding Listener Event on button, you must implement ActionListener to class.
             add(next);
 
 
@@ -183,11 +190,50 @@ public class Signup2 extends JFrame implements ActionListener {
         }
     @Override
     public void actionPerformed(ActionEvent e) {
+        // 4.3.1 - fetching data from each input fields.
+        // ------------------- To fetch data from comboBox we use - getSelectedItem -------------
+        String religion = (String)comboBox.getSelectedItem();
+        String category = (String)comboBox2.getSelectedItem();
+        String income = (String)comboBox3.getSelectedItem();
+        String education = (String)comboBox4.getSelectedItem();
+        String occupation = (String)comboBox5.getSelectedItem();
 
+        String pan = textPAN.getText();
+        String aadhar = textAadhar.getText();
+
+        String sCitizen = "";
+        if(r1.isSelected()){
+            sCitizen = "yes";
+        }else if(r2.isSelected()){
+            sCitizen = "no";
+        }
+        String existingAcc = "";
+        if(r3.isSelected()){
+            existingAcc = "yes";
+        }else if(r4.isSelected()){
+            existingAcc = "no";
+        }
+
+        try{
+            // Checking 2 field , we can select more.
+            if(pan.equals("") || aadhar.equals("")){
+                JOptionPane.showMessageDialog(null,"Fill the mandatory field");
+            }else{
+                // Creating Connection Object form Conn class.
+                Conn c1 = new Conn();
+                String query = "insert into signup2 values('"+formno+"','"+religion+"','"+category+"','"+income+"','"+education+"','"+occupation+"','"+pan+"','"+aadhar+"','"+sCitizen+"','"+existingAcc+"')";
+                c1.statement.executeUpdate(query);
+                new Signup3(formno);
+                setVisible(false);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
-            new Signup2(formno);
+            new Signup2(1234);
+
     }
 
 }

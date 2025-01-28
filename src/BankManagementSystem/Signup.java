@@ -203,11 +203,6 @@ public class Signup extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    //    1.1   Main method
-    public static void main(String[] args) {
-        // 1.3 Anonymous Object
-        new Signup();
-    }
     // 2.18.2
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -254,12 +249,17 @@ public class Signup extends JFrame implements ActionListener {
                 // 3.6.4 - Now we Execute query.
                 con1.statement.executeUpdate(query);
                 // 3.7 - After executing query , we need to jump to another class, to Fill another details. also passing "Random" as parameter
-                new Signup2(rand);
+                new Signup2(formno);
                 setVisible(false);
             }
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+    //    1.1   Main method
+    public static void main(String[] args) {
+        // 1.3 Anonymous Object
+        new Signup();
     }
 }

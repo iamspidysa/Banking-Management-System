@@ -80,7 +80,7 @@ public class Login extends JFrame implements ActionListener {
         add(passwordField2);
 
         // 6.6 Adding Button
-        button1 = new JButton("SIGN In");
+        button1 = new JButton("SIGN IN");
         button1.setBounds(300, 300, 100, 30);
         button1.setFont(new Font("Arial", Font.BOLD, 14));
         button1.setForeground(Color.WHITE);
@@ -132,8 +132,9 @@ public class Login extends JFrame implements ActionListener {
             } else if (l.getSource() == button2) {  // getSource() gives you the object that triggered the event (like a button or a text field).
                 textField2.setText("");
                 passwordField2.setText("");
-            } else if (l.getSource() == button3) {
-
+            } else if (l.getSource() == button3) {   // SignUp Button
+                new Signup();
+                setVisible(false);
             }
         } catch (Exception e) {
             // prints out information about where the exception occurred in the program, including the method calls that led to the exception, the class names, and the line numbers in the source code.
