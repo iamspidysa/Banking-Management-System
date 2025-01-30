@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.util.Arrays;
 
 //3. Extends JFrame to create a frame.
 // 7. Now Implementing ActionListener to perform Event on Buttons.
@@ -119,6 +121,7 @@ public class Login extends JFrame implements ActionListener {
         setLayout(null);
         setSize(850, 480);  // Size of the frame
         setLocation(450, 200); // 4.1 Location of the JFrame
+        setUndecorated(true);  // 8. Removes Window Frame , help to decorate. -> Also we cannot call it after making frame visible it will throw error, because java runs code line by line.
         setVisible(true);
     }
 
@@ -127,8 +130,22 @@ public class Login extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent l) {
         // 7.5 After Getting object from button , we are performing action based on button clicked.
         try {
+            // Sign IN Button
             if (l.getSource() == button1) {
-
+                Conn c = new Conn();
+                String cardno = textField2.getText();
+                String pin = passwordField2.getText();
+                String query = "select * from login where card_no = '"+cardno+"' && pin = '"+pin+"'";
+                ResultSet rs = c.statement.executeQuery(query);
+                if (rs.next()){
+                    // Passing Just pin , we will pass cardno too -----------------------------------------------------------
+                    new TransactionMain(pin);
+                    setVisible(false);
+                }
+                // If password is wrong
+                else{
+                    JOptionPane.showMessageDialog(null,"Your CARD NUMBER or PIN is Wrong");
+                }
             } else if (l.getSource() == button2) {  // getSource() gives you the object that triggered the event (like a button or a text field).
                 textField2.setText("");
                 passwordField2.setText("");
