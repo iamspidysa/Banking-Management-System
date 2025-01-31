@@ -115,6 +115,11 @@ public class TransactionMain extends JFrame implements ActionListener {
                 new FastCash(pin);
                 setVisible(false);
             }
+            // Change PIN
+            else if (e.getSource() == b5) {
+                new ChangePin(pin);
+                setVisible(false);
+            }
             // Balance Enquiry
             else if (e.getSource()== b6) {
                 setVisible(false);

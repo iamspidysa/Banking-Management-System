@@ -9,10 +9,11 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
 public class BalanceEnquiry extends JFrame implements ActionListener {
-JLabel l2;  // declaring globally
+    JLabel l2;  // declaring globally
     JButton b1;
     String pin;
-    BalanceEnquiry(String pin){
+
+    BalanceEnquiry(String pin) {
         this.pin = pin;
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icon/atm2.png"));
         Image i2 = i1.getImage().getScaledInstance(1750, 910, Image.SCALE_DEFAULT);
@@ -41,11 +42,11 @@ JLabel l2;  // declaring globally
         back.add(b1);
 
         int balance = 0;
-        try{
+        try {
             Conn c = new Conn();
-            String query = "select * from bank where pin = '"+pin+"'";
+            String query = "select * from bank where pin = '" + pin + "'";
             ResultSet rs = c.statement.executeQuery(query);
-            while(rs.next()){
+            while (rs.next()) {
                 if (rs.getString("type").equals("Deposit")) {
                     balance += Integer.parseInt(rs.getString("amount"));
                 } else {
@@ -56,7 +57,7 @@ JLabel l2;  // declaring globally
             e.printStackTrace();
         }
 
-        l2.setText(balance+"");
+        l2.setText(balance + "");
 
 
         setLayout(null);
@@ -69,11 +70,11 @@ JLabel l2;  // declaring globally
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            if (e.getSource()==b1){
+            if (e.getSource() == b1) {
                 setVisible(false);
                 new TransactionMain(pin);
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
