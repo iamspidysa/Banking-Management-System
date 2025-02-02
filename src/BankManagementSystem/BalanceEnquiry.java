@@ -41,16 +41,16 @@ public class BalanceEnquiry extends JFrame implements ActionListener {
         b1.addActionListener(this);
         back.add(b1);
 
-        int balance = 0;
+        long balance = 0;
         try {
             Conn c = new Conn();
             String query = "select * from bank where pin = '" + pin + "'";
             ResultSet rs = c.statement.executeQuery(query);
             while (rs.next()) {
                 if (rs.getString("type").equals("Deposit")) {
-                    balance += Integer.parseInt(rs.getString("amount"));
+                    balance += Long.parseLong(rs.getString("amount"));
                 } else {
-                    balance -= Integer.parseInt(rs.getString("amount"));
+                    balance -= Long.parseLong(rs.getString("amount"));
                 }
             }
         } catch (Exception e) {
@@ -63,6 +63,7 @@ public class BalanceEnquiry extends JFrame implements ActionListener {
         setLayout(null);
         setSize(1750, 1080);
         setLocation(-5, 0);
+        setUndecorated(true);
         setVisible(true);
     }
 

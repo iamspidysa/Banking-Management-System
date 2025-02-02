@@ -94,6 +94,7 @@ public class TransactionMain extends JFrame implements ActionListener {
         setLayout(null);
         setSize(1750, 1080);
         setLocation(0, 0);
+        setUndecorated(true);
         setVisible(true);
     }
 
@@ -113,6 +114,11 @@ public class TransactionMain extends JFrame implements ActionListener {
             // Fast Cash
             else if (e.getSource() == b3) {
                 new FastCash(pin);
+                setVisible(false);
+            }
+            // Mini Statement
+            else if (e.getSource() == b4) {
+                new MiniStatement(pin);
                 setVisible(false);
             }
             // Change PIN

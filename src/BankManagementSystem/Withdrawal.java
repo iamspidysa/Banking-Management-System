@@ -67,6 +67,7 @@ public class Withdrawal extends JFrame implements ActionListener {
         setLayout(null);
         setSize(1750, 1080);
         setLocation(-5, 0);
+        setUndecorated(true);
         setVisible(true);
     }
 
@@ -83,7 +84,7 @@ public class Withdrawal extends JFrame implements ActionListener {
                     Conn c = new Conn();
                     String query = "select * from bank where pin = '" + pin + "'";
                     ResultSet rs = c.statement.executeQuery(query);
-                    int balance = 0;
+                    long balance = 0;
                     while (rs.next()) {
                         /* Resultset rs returns a table, and rs.next() move the move the cursor down the list.
                          *  Each call to rs.next() advances the cursor to the next row in the result set.
@@ -94,13 +95,13 @@ public class Withdrawal extends JFrame implements ActionListener {
                          * and the corresponding block of code will be executed.
                          */
                         if (rs.getString("type").equals("Deposit")) {
-                            balance += Integer.parseInt(rs.getString("amount"));
+                            balance += Long.parseLong(rs.getString("amount"));
                         } else {
-                            balance -= Integer.parseInt(rs.getString("amount"));
+                            balance -= Long.parseLong(rs.getString("amount"));
                         }
                     }
                     // For insufficient Balance
-                    if (balance < Integer.parseInt(amount)) {
+                    if (balance < Long.parseLong(amount)) {
                         JOptionPane.showMessageDialog(null, "Insufficient Balance");
                         return;
                     }

@@ -1,0 +1,63 @@
+CREATE database BankSys;
+use BankSys;
+
+create table signup
+(
+form_no varchar(5),
+name varchar(30),
+father_name varchar(30),
+dob varchar(20),
+gender varchar(10),
+email varchar(60),
+marital_status varchar(10),
+address varchar(60),
+city varchar(20),
+pincode varchar(7),
+state varchar(20)
+);
+select * from signup;
+
+
+create table signup2
+(
+form_no varchar(5),
+religion varchar(30),
+category varchar(20),
+income varchar(40),
+education varchar(60),
+occupation varchar(10),
+pan varchar(40),
+aadhar varchar(40),
+senior_citizen varchar(10),
+existing_acc varchar(10)
+);
+select * from signup2;
+
+
+create table signup3
+(
+form_no varchar(5),
+account_type varchar(30),
+card_no varchar(40),
+pin varchar(10),
+facility varchar(200)
+);
+select * from signup3;
+
+
+create table login
+(
+form_no varchar(10),
+card_no varchar(40),
+pin varchar(10)
+);
+select * from login;
+
+create table bank
+(
+pin varchar(10),
+date varchar(50),
+type varchar(20),
+amount varchar(20)
+);
+select * from bank;

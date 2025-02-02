@@ -71,6 +71,7 @@ public class ChangePin extends JFrame implements ActionListener {
         setLayout(null);
         setSize(1750, 1080);
         setLocation(0, 0);
+        setUndecorated(true);
         setVisible(true);
     }
     @Override

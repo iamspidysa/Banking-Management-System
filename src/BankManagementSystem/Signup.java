@@ -76,6 +76,8 @@ public class Signup extends JFrame implements ActionListener {
         dateChooser = new JDateChooser();
         dateChooser.setForeground(new Color(105,105,105));
         dateChooser.setBounds(300,340,400,30);
+        dateChooser.getDateEditor().setEnabled(false);
+        dateChooser.getDateEditor().getUiComponent().setFocusable(false);
         add(dateChooser);
         // 2.10.1 - Label Gender
         JLabel labelGender = new JLabel("Gender");

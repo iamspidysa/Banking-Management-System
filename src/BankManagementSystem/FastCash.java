@@ -89,6 +89,7 @@ public class FastCash extends JFrame implements ActionListener {
         setLayout(null);
         setSize(1750, 1080);
         setLocation(0, 0);
+        setUndecorated(true);
         setVisible(true);
     }
 
@@ -106,15 +107,15 @@ public class FastCash extends JFrame implements ActionListener {
                 Date date = new Date();
                 String query = "select * from bank where pin = '"+pin+"'";
                 ResultSet rs =  c.statement.executeQuery(query);
-                int balance = 0;
+                long balance = 0;
                 while (rs.next()){
                     if(rs.getString("type").equals("Deposit")){
-                        balance += Integer.parseInt(rs.getString("amount"));
+                        balance += Long.parseLong(rs.getString("amount"));
                     }else{
-                        balance -= Integer.parseInt(rs.getString("amount"));
+                        balance -= Long.parseLong(rs.getString("amount"));
                     }
                 }String num = "17";
-                if(e.getSource() != b7 && balance < Integer.parseInt(amount)){
+                if(e.getSource() != b7 && balance < Long.parseLong(amount)){
                     JOptionPane.showMessageDialog(null,"Insufficient Balance");
                     return;
                 }

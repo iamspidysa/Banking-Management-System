@@ -60,6 +60,7 @@ public class Deposit extends JFrame implements ActionListener {
         setLayout(null);
         setSize(1750,1080);
         setLocation(-5,0);
+        setUndecorated(true);
         setVisible(true);
     }
 
